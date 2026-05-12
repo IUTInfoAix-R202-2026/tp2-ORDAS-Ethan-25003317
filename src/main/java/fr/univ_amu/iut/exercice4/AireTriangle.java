@@ -1,5 +1,7 @@
 package fr.univ_amu.iut.exercice4;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.beans.binding.StringExpression;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
@@ -28,8 +30,8 @@ import javafx.beans.property.SimpleIntegerProperty;
  *   <li>{@code Bindings.format()} pour créer une {@link StringExpression}
  * </ul>
  *
- * @see <a
- *     href="https://openjfx.io/javadoc/25/javafx.base/javafx/beans/binding/Bindings.html">Bindings</a>
+ * @see <a href=
+ *     "https://openjfx.io/javadoc/25/javafx.base/javafx/beans/binding/Bindings.html">Bindings</a>
  */
 public class AireTriangle {
 
@@ -63,33 +65,47 @@ public class AireTriangle {
    * StringExpression} via {@code Bindings.format()}.
    */
   private void createBinding() {
+    NumberBinding determinant =
+        x1.multiply(y2)
+            .subtract(x1.multiply(y3))
+            .add(x2.multiply(y3))
+            .subtract(x2.multiply(y1))
+            .add(x3.multiply(y1))
+            .subtract(x3.multiply(y2));
+    area.bind(
+        Bindings.when(determinant.greaterThanOrEqualTo(0))
+            .then(determinant.divide(2.0))
+            .otherwise(determinant.negate().divide(2.0)));
+    output =
+        Bindings.format("P1(%s,%s) P2(%s,%s) P3(%s,%s) => aire = %s", x1, y1, x2, y2, x3, y3, area);
     // TODO exercice 4 : créer le binding pour calculer l'aire.
     //
     // Partie A - Formule du déterminant avec l'API fluente :
     //
     // 1. Calculer le déterminant comme NumberBinding :
-    //    determinant = x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)
-    //    En utilisant l'API fluente :
-    //    x1.multiply(y2).subtract(x1.multiply(y3))
-    //      .add(x2.multiply(y3)).subtract(x2.multiply(y1))
-    //      .add(x3.multiply(y1)).subtract(x3.multiply(y2))
+    // determinant = x1*(y2-y3) + x2*(y3-y1) + x3*(y1-y2)
+    // En utilisant l'API fluente :
+    // x1.multiply(y2).subtract(x1.multiply(y3))
+    // .add(x2.multiply(y3)).subtract(x2.multiply(y1))
+    // .add(x3.multiply(y1)).subtract(x3.multiply(y2))
     //
     // 2. Lier area au déterminant divisé par 2 :
-    //    area.bind(determinant.divide(2.0))
-    //    Note : pour la valeur absolue, utiliser
-    //    Bindings.when(determinant.greaterThanOrEqualTo(0))
-    //            .then(determinant.divide(2.0))
-    //            .otherwise(determinant.negate().divide(2.0))
+    // area.bind(determinant.divide(2.0))
+    // Note : pour la valeur absolue, utiliser
+    // Bindings.when(determinant.greaterThanOrEqualTo(0))
+    // .then(determinant.divide(2.0))
+    // .otherwise(determinant.negate().divide(2.0))
     //
     // Partie B - StringExpression pour l'affichage :
     //
     // 3. Créer output avec Bindings.format() :
-    //    "P1(%s,%s) P2(%s,%s) P3(%s,%s) => aire = %s"
-    //    en passant x1, y1, x2, y2, x3, y3, area
+    // "P1(%s,%s) P2(%s,%s) P3(%s,%s) => aire = %s"
+    // en passant x1, y1, x2, y2, x3, y3, area
   }
 
   void printResult() {
     // TODO exercice 4 : afficher output.get() sur System.out.
+    System.out.println(output.get());
   }
 
   // --- Setters de points ---
