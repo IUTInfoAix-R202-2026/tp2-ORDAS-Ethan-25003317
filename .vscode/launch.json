@@ -3,13 +3,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ProprieteSimple",
-            "request": "launch",
-            "mainClass": "tp2.javafx/fr.univ_amu.iut.exercice1.ProprieteSimple",
-            "projectName": "tp2"
-        },
-        {
-            "type": "java",
             "name": "JavaFX : debug l'application",
             "request": "launch",
             "mainClass": "tp2.javafx/fr.univ_amu.iut.App",
@@ -17,14 +10,10 @@
             "vmArgs": [
                 "--enable-native-access=ALL-UNNAMED",
                 "--enable-native-access=javafx.graphics",
-                "--add-reads",
-                "javafx.graphics=ALL-UNNAMED",
-                "--add-opens",
-                "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED",
-                "--add-opens",
-                "javafx.base/com.sun.javafx.runtime=ALL-UNNAMED",
-                "--add-exports",
-                "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
+                "--add-reads", "javafx.graphics=ALL-UNNAMED",
+                "--add-opens", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED",
+                "--add-opens", "javafx.base/com.sun.javafx.runtime=ALL-UNNAMED",
+                "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
             ]
         }
     ]
