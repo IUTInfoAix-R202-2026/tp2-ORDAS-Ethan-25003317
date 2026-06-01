@@ -2,6 +2,7 @@ package fr.univ_amu.iut.exercice5;
 
 import fr.univ_amu.iut.exercice4.AireTriangle;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -73,6 +74,16 @@ public class CalculatriceTriangle extends Application {
     // 6. Appeler ajouterPanneauDessin() pour ajouter la zone de dessin.
     // 7. Appeler creerBindings() pour lier les sliders au modele.
     // 8. Creer la Scene, l'attacher au Stage, afficher.
+    configGrille();
+    configSliders();
+    ajouterSliders();
+    ajouterAire();
+    ajouterLabelsPoints();
+    ajouterPanneauDessin();
+    creerBindings();
+    Scene scene = new Scene(grille);
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   static void configSlider(Slider slider) {
@@ -84,11 +95,29 @@ public class CalculatriceTriangle extends Application {
     // slider.setMinorTickCount(0)
     // slider.setBlockIncrement(1)
     // slider.setSnapToTicks(true)
+    slider.setShowTickLabels(true);
+    slider.setShowTickMarks(true);
+    slider.setMajorTickUnit(1);
+    slider.setMinorTickCount(0);
+    slider.setBlockIncrement(1);
+    slider.setSnapToTicks(true);
   }
 
   void configSliders() {
     // TODO exercice 5 : appeler configSlider() sur les 6 sliders.
     // Donner un id à chaque slider : "slider-x1", "slider-y1", etc.
+    sliderX1.setId("slider-x1");
+    sliderX2.setId("slider-x2");
+    sliderX3.setId("slider-x3");
+    sliderY1.setId("slider-y1");
+    sliderY2.setId("slider-y2");
+    sliderY3.setId("slider-y3");
+    configSlider(sliderX1);
+    configSlider(sliderX2);
+    configSlider(sliderX3);
+    configSlider(sliderY1);
+    configSlider(sliderY2);
+    configSlider(sliderY3);
   }
 
   void configGrille() {
@@ -96,31 +125,57 @@ public class CalculatriceTriangle extends Application {
     //
     // grille.setHgap(10), grille.setVgap(10)
     // Ajouter 3 ColumnConstraints de largeur 200 chacune (200px par colonne).
+    grille.setHgap(10);
+    grille.setVgap(10);
+    ColumnConstraints col = new ColumnConstraints(200);
+    grille
+        .getColumnConstraints()
+        .addAll(col, new ColumnConstraints(200), new ColumnConstraints(200));
   }
 
   void ajouterSliders() {
     // TODO exercice 5 : placer les 6 sliders et leurs libellés dans la grille.
     //
     // Disposition (col, row) :
-    //   (0, 1) labelX1   (1, 1) sliderX1
-    //   (0, 2) labelY1   (1, 2) sliderY1
-    //   (0, 3) labelX2   (1, 3) sliderX2
-    //   (0, 4) labelY2   (1, 4) sliderY2
-    //   (0, 5) labelX3   (1, 5) sliderX3
-    //   (0, 6) labelY3   (1, 6) sliderY3
+    // (0, 1) labelX1 (1, 1) sliderX1
+    // (0, 2) labelY1 (1, 2) sliderY1
+    // (0, 3) labelX2 (1, 3) sliderX2
+    // (0, 4) labelY2 (1, 4) sliderY2
+    // (0, 5) labelX3 (1, 5) sliderX3
+    // (0, 6) labelY3 (1, 6) sliderY3
+    grille.add(sliderX1, 1, 1);
+    grille.add(labelX1, 0, 1);
+    grille.add(sliderX2, 1, 2);
+    grille.add(labelX2, 0, 2);
+    grille.add(sliderX3, 1, 3);
+    grille.add(labelX3, 0, 3);
+    grille.add(sliderY1, 1, 4);
+    grille.add(labelY1, 0, 4);
+    grille.add(sliderY2, 1, 5);
+    grille.add(labelY2, 0, 5);
+    grille.add(sliderY3, 1, 6);
+    grille.add(labelY3, 0, 6);
   }
 
   void ajouterAire() {
-    // TODO exercice 5 : placer le label "Aire :" et le textFieldAire dans la grille.
+    // TODO exercice 5 : placer le label "Aire :" et le textFieldAire dans la
+    // grille.
     //
-    // (0, 7) labelAire   (1, 7) textFieldAire
+    // (0, 7) labelAire (1, 7) textFieldAire
     // textFieldAire.setId("aire") et setEditable(false) (résultat en lecture seule)
+    textFieldAire.setId("aire");
+    textFieldAire.setEditable(false);
+    grille.add(labelAire, 0, 7);
+    grille.add(textFieldAire, 1, 7);
   }
 
   void ajouterLabelsPoints() {
     // TODO exercice 5 : placer les labels P1, P2, P3 en titres de section.
     //
-    // (0, 0) titre ou  (1, 0) labelP1 ... (position libre selon votre choix)
+    // (0, 0) titre ou (1, 0) labelP1 ... (position libre selon votre choix)
+    grille.add(labelP1, 1, 0);
+    grille.add(labelP2, 2, 0);
+    grille.add(labelP3, 3, 0);
   }
 
   void ajouterPanneauDessin() {
@@ -129,25 +184,48 @@ public class CalculatriceTriangle extends Application {
     // panneauDessin.setId("dessin")
     // panneauDessin.setPrefSize(500, 500)
     // panneauDessin.getChildren().addAll(ligneP1P2, ligneP2P3, ligneP3P1)
-    // grille.add(panneauDessin, 0, 8, 3, 1)  // colspan 3
+    // grille.add(panneauDessin, 0, 8, 3, 1) // colspan 3
+    panneauDessin.setId("dessin");
+    panneauDessin.setPrefSize(500, 500);
+    panneauDessin.getChildren().addAll(ligneP1P2, ligneP2P3, ligneP3P1);
+    grille.add(panneauDessin, 0, 8, 3, 1);
   }
 
   void creerBindings() {
     // TODO exercice 5 : lier les sliders au modèle et les lignes aux coordonnées.
     //
     // 1. Lier chaque slider au modèle :
-    //    modele.x1Property().bind(sliderX1.valueProperty())
-    //    (idem pour y1, x2, y2, x3, y3)
+    // modele.x1Property().bind(sliderX1.valueProperty())
+    // (idem pour y1, x2, y2, x3, y3)
     //
     // 2. Lier textFieldAire au modèle :
-    //    textFieldAire.textProperty().bind(modele.areaProperty().asString())
+    // textFieldAire.textProperty().bind(modele.areaProperty().asString())
     //
     // 3. Lier les coordonnées des lignes au modèle (facteur 50) :
-    //    ligneP1P2.startXProperty().bind(modele.x1Property().multiply(50))
-    //    ligneP1P2.startYProperty().bind(modele.y1Property().multiply(50))
-    //    ligneP1P2.endXProperty().bind(modele.x2Property().multiply(50))
-    //    ligneP1P2.endYProperty().bind(modele.y2Property().multiply(50))
-    //    (idem pour P2P3 et P3P1)
+    // ligneP1P2.startXProperty().bind(modele.x1Property().multiply(50))
+    // ligneP1P2.startYProperty().bind(modele.y1Property().multiply(50))
+    // ligneP1P2.endXProperty().bind(modele.x2Property().multiply(50))
+    // ligneP1P2.endYProperty().bind(modele.y2Property().multiply(50))
+    // (idem pour P2P3 et P3P1)
+    modele.x1Property().bind(sliderX1.valueProperty());
+    modele.x2Property().bind(sliderX2.valueProperty());
+    modele.x3Property().bind(sliderX3.valueProperty());
+    modele.y1Property().bind(sliderY1.valueProperty());
+    modele.y2Property().bind(sliderY2.valueProperty());
+    modele.y3Property().bind(sliderY3.valueProperty());
+    textFieldAire.textProperty().bind(modele.areaProperty().asString());
+    ligneP1P2.startXProperty().bind(modele.x1Property().multiply(50));
+    ligneP1P2.startYProperty().bind(modele.y1Property().multiply(50));
+    ligneP1P2.endXProperty().bind(modele.x2Property().multiply(50));
+    ligneP1P2.endYProperty().bind(modele.y2Property().multiply(50));
+    ligneP2P3.startXProperty().bind(modele.x2Property().multiply(50));
+    ligneP2P3.startYProperty().bind(modele.y2Property().multiply(50));
+    ligneP2P3.endXProperty().bind(modele.x3Property().multiply(50));
+    ligneP2P3.endYProperty().bind(modele.y3Property().multiply(50));
+    ligneP3P1.startXProperty().bind(modele.x3Property().multiply(50));
+    ligneP3P1.startYProperty().bind(modele.y3Property().multiply(50));
+    ligneP3P1.endXProperty().bind(modele.x1Property().multiply(50));
+    ligneP3P1.endYProperty().bind(modele.y1Property().multiply(50));
   }
 
   public static void main(String[] args) {
