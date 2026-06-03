@@ -7,7 +7,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -31,14 +30,12 @@ class CercleInteractifTest {
     new CercleInteractif().start(stage);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void laFenetreEstVisible(FxRobot robot) {
     assertThat(stage.isShowing()).as("le Stage doit être affiché").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void leCercleExiste(FxRobot robot) {
@@ -46,7 +43,6 @@ class CercleInteractifTest {
     assertThat(c).as("un Circle avec id 'cercle' doit exister").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void leSliderExiste(FxRobot robot) {
@@ -55,7 +51,6 @@ class CercleInteractifTest {
     assertThat(s.getMax()).as("le max du slider doit être 250").isEqualTo(250);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void leTextFieldExiste(FxRobot robot) {
@@ -63,7 +58,6 @@ class CercleInteractifTest {
     assertThat(tf).as("un TextField avec id 'rayon' doit exister").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void rayonInitialEst150(FxRobot robot) {
@@ -77,7 +71,6 @@ class CercleInteractifTest {
         .isCloseTo(150, within(1.0));
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void deplacerSliderModifieLeCercle(FxRobot robot) {
@@ -91,7 +84,6 @@ class CercleInteractifTest {
         .isCloseTo(100, within(1.0));
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void deplacerSliderModifieLeTextField(FxRobot robot) {
@@ -105,7 +97,6 @@ class CercleInteractifTest {
         .contains("200");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(8)
   void leTextFieldModifieLeSliderEtLeCercle(FxRobot robot) {
@@ -123,7 +114,6 @@ class CercleInteractifTest {
         .isCloseTo(75, within(1.0));
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(9)
   void leCercleEstCentreDansLePanneau(FxRobot robot) {
