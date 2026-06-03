@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -31,14 +30,12 @@ class FormulaireConnexionTest {
     new FormulaireConnexion().start(stage);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(1)
   void laFenetreEstVisible(FxRobot robot) {
     assertThat(stage.isShowing()).as("le Stage doit être affiché").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(2)
   void leChampIdentifiantExiste(FxRobot robot) {
@@ -46,7 +43,6 @@ class FormulaireConnexionTest {
     assertThat(tf).as("un TextField avec id 'user-id' doit exister").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(3)
   void leChampMotDePasseExiste(FxRobot robot) {
@@ -54,7 +50,6 @@ class FormulaireConnexionTest {
     assertThat(pf).as("un PasswordField avec id 'pwd' doit exister").isNotNull();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(4)
   void leChampMotDePasseEstNonEditableAuDebut(FxRobot robot) {
@@ -64,7 +59,6 @@ class FormulaireConnexionTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(5)
   void saisirSixCaracteresRendMotDePasseEditable(FxRobot robot) {
@@ -78,7 +72,6 @@ class FormulaireConnexionTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(6)
   void cinqCaracteresNeSuffitPas(FxRobot robot) {
@@ -92,7 +85,6 @@ class FormulaireConnexionTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(7)
   void boutonOkDesactiveInitialement(FxRobot robot) {
@@ -102,7 +94,6 @@ class FormulaireConnexionTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(8)
   void boutonOkDesactiveSiMotDePasseTropCourt(FxRobot robot) {
@@ -118,7 +109,6 @@ class FormulaireConnexionTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(9)
   void motDePasseSansChiffreGardeOkDesactive(FxRobot robot) {
@@ -132,7 +122,6 @@ class FormulaireConnexionTest {
     assertThat(ok.isDisabled()).as("mot de passe sans chiffre - OK reste désactivé").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(10)
   void motDePasseSansMajusculeGardeOkDesactive(FxRobot robot) {
@@ -146,7 +135,6 @@ class FormulaireConnexionTest {
     assertThat(ok.isDisabled()).as("mot de passe sans majuscule - OK reste désactivé").isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(11)
   void motDePasseValideActiveOk(FxRobot robot) {
@@ -162,7 +150,6 @@ class FormulaireConnexionTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(12)
   void boutonAnnulerDesactiveSiChampsVides(FxRobot robot) {
@@ -172,7 +159,6 @@ class FormulaireConnexionTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(13)
   void boutonAnnulerActifSiUnChampRempli(FxRobot robot) {
@@ -186,7 +172,6 @@ class FormulaireConnexionTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(14)
   void boutonAnnulerVideLesChamps(FxRobot robot) {
@@ -202,7 +187,6 @@ class FormulaireConnexionTest {
     assertThat(pf.getText()).as("pwd doit être vide après Annuler").isEmpty();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   @Order(15)
   void boutonOkAfficheLMessage(FxRobot robot) {

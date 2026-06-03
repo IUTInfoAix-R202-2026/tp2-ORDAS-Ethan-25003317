@@ -3,6 +3,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FormulaireConnexion",
+            "request": "launch",
+            "mainClass": "tp2.javafx/fr.univ_amu.iut.exercice6.FormulaireConnexion",
+            "projectName": "tp2"
+        },
+        {
+            "type": "java",
+            "name": "PaletteReactive",
+            "request": "launch",
+            "mainClass": "tp2.javafx/fr.univ_amu.iut.exercice3.PaletteReactive",
+            "projectName": "tp2"
+        },
+        {
+            "type": "java",
             "name": "JavaFX : debug l'application",
             "request": "launch",
             "mainClass": "tp2.javafx/fr.univ_amu.iut.App",
