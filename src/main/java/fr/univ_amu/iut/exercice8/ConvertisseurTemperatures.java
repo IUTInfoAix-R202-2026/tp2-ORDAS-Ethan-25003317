@@ -1,6 +1,11 @@
 package fr.univ_amu.iut.exercice8;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.scene.Scene;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 
@@ -49,6 +54,47 @@ public class ConvertisseurTemperatures extends Application {
     //        new NumberStringConverter())
     //
     // 6. Composer les panneaux dans un HBox, créer la Scene, afficher.
+    Slider sliderC = new Slider(0, 100, 0);
+    sliderC.setId("slider-celsius");
+
+    Slider sliderF = new Slider(32, 212, 32);
+    sliderF.setId("slider-fahrenheit");
+
+    TextField tfC = new TextField();
+    tfC.setId("tf-celsius");
+
+    TextField tfF = new TextField();
+    tfF.setId("tf-fahrenheit");
+
+    Bindings.bindBidirectional(
+        tfC.textProperty(), sliderC.valueProperty(), new NumberStringConverter());
+    Bindings.bindBidirectional(
+        tfF.textProperty(), sliderF.valueProperty(), new NumberStringConverter());
+
+    sliderC
+        .valueProperty()
+        .addListener(
+            (obs, old, newVal) -> {
+              if (!updating) {
+                updating = true;
+                sliderF.setValue(newVal.doubleValue() * 9.0 / 5.0 + 32);
+                updating = false;
+              }
+            });
+    sliderF
+        .valueProperty()
+        .addListener(
+            (obs, old, newVal) -> {
+              if (!updating) {
+                updating = true;
+                sliderC.setValue((newVal.doubleValue() - 32) * 5.0 / 9.0);
+                updating = false;
+              }
+            });
+
+    HBox root = new HBox(sliderC, sliderF, tfC, tfF);
+    primaryStage.setScene(new Scene(root));
+    primaryStage.show();
   }
 
   public static void main(String[] args) {
